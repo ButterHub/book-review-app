@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
+const { ensureAuthenticated } = require("./helpers/auth.js");
 
 // Load idea model
 require("../models/Idea");
@@ -11,7 +12,7 @@ const vars = require("../vars");
 
 // ROUTE: Idea index
 router.get("/", (req, res) => {
-  Idea.find({})
+  Idea.find({ user: "public" })
     .sort({ date: "desc" })
     .then(ideas => {
       res.render("./ideas/public", {
@@ -26,21 +27,45 @@ router.get("/add", (req, res) => {
   res.render("ideas/add", { commonVariables: vars });
 });
 
+// ROUTE: Idea private index
+router.get("/private", ensureAuthenticated, (req, res) => {
+  Idea.find({ user: req.user.id })
+    .sort({ date: "desc" })
+    .then(ideas => {
+      res.render("./ideas/private", {
+        ideas,
+        commonVariables: vars
+      });
+    });
+});
+
 // ROUTE: Edit post
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", ensureAuthenticated, (req, res) => {
   Idea.findOne({
     _id: req.params.id
   }).then(idea => {
-    res.render("ideas/edit", {
-      idea,
-      commonVariables: vars
-    });
+    if (idea.user != "public") {
+      if (idea.user != req.user.id) {
+        req.flash("error_msg", "Not authorised.");
+        res.redirect("/");
+      } else {
+        res.render("ideas/edit", {
+          idea,
+          commonVariables: vars
+        });
+      }
+    } else {
+      res.render("ideas/edit", {
+        idea,
+        commonVariables: vars
+      });
+    }
   });
 });
 
 // ROUTE: edit post form
 // Need method override because cannot use method="put" in html
-router.put("/:id", (req, res) => {
+router.put("/:id", ensureAuthenticated, (req, res) => {
   Idea.findOne({
     _id: req.params.id
   }).then(idea => {
@@ -57,7 +82,7 @@ router.put("/:id", (req, res) => {
 });
 
 // ROUTE: Delete post
-router.delete("/:id", (req, res) => {
+router.delete("/:id", ensureAuthenticated, (req, res) => {
   Idea.deleteOne({
     _id: req.params.id
   }).then(() => {
@@ -89,11 +114,17 @@ router.post("/", (req, res) => {
       notes: req.body.notes
     });
   } else {
+    if (req.user) {
+      userId = req.user.id;
+    } else {
+      userId = "public";
+    }
     const newUser = {
       title: req.body.title,
       author: req.body.author,
       bookCoverUrl: req.body.bookCoverUrl,
-      notes: req.body.notes
+      notes: req.body.notes,
+      user: userId
     };
     new Idea(newUser).save().then(idea => {
       req.flash("success_msg", "Book added successfully.");

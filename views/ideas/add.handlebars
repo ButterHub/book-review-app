@@ -7,6 +7,24 @@
   <h3>Book notes</h3>
   <form action="/ideas" method="POST">
     <div class="form-group">
+      {{#if user}}
+      <label class=" mt-2">Type of note </label>
+      <br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="type" id="public" value="public" checked>
+        <label class="form-check-label" for="public">
+          Public
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="type" id="private" value="private">
+        <label class="form-check-label" for="private">
+          Private
+        </label>
+      </div>
+      {{/if}}
+    </div>
+    <div class="form-group">
       <label for="title">Title</label>
       <input type="text" name="title" id="title" class="form-control" placeholder="The art of the deal" required>
     </div>

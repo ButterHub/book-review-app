@@ -1,15 +1,6 @@
-{{#if ideas}}
 <div class="alert alert-success font-weight-bold">
-  {{#if user}}
-  This is the public book list. Feel free to add books and notes. Since you are logged in, you can also add private
-  books.
-  {{else}}
-  This is the public book list. Feel free to add books and notes. Alternatively, make an account and store your books
-  privately.
-  {{/if}}
+  This is your private book list. Nobody can see these notes but you!
 </div>
-{{/if}}
-
 {{#each ideas}}
 <div class="container card card-body mb-3">
   <div class="row">
@@ -30,8 +21,7 @@
 
 {{else}}
 <div class="alert alert-danger font-weight-bold">
-  here are currently no books on the public list. Feel free to add some. Alternatively, make an account and store your
-  books privately.
+  here are currently no books on your private list.
 </div>
 
 {{/each}}

@@ -90,7 +90,7 @@ app.use(function(req, res, next) {
 
 // Index route
 app.get("/", (req, res) => {
-  Idea.find({})
+  Idea.find({ user: "public" })
     .sort({ date: "desc" })
     .then(ideas => {
       res.render("index", {

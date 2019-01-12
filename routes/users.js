@@ -18,6 +18,13 @@ router.get("/login", (req, res) => {
   });
 });
 
+// ROUTE: user logout
+router.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success_msg", "You are logged out.");
+  res.redirect("/users/login");
+});
+
 // ROUTE post: user login
 // TODO When login fails, pass the username and passsword previously entered, so user doesn't have to retype
 router.post("/login", (req, res, next) => {
