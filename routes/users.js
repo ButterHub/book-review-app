@@ -18,6 +18,16 @@ router.get("/login", (req, res) => {
   });
 });
 
+// ROUTE post: user login
+// TODO When login fails, pass the username and passsword previously entered, so user doesn't have to retype
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/ideas",
+    failureRedirect: "/users/login",
+    failureFlash: true
+  })(req, res, next);
+});
+
 // ROUTE get: register form
 router.get("/register", (req, res) => {
   res.render("users/register", {

@@ -4,6 +4,15 @@
   </div>
   <h2 class="display-4 font-weight-bold">{{commonVariables.title}}</h1>
     <p class="lead">Add a book, and add scribbles, ideas and reviews.</p>
-    <a href="/ideas/add" class="btn btn-dark btn-lg">Add Book</a>
+    <div class="container">
+      <a href="/ideas/add" class="btn btn-dark btn-lg col mb-2"><i class="fas fa-globe-europe mx-2"></i>Add Book to
+        Public
+        List<i class="fas fa-globe-europe mx-2"></i></a>
+      {{#if user}}
+      <a href="/ideas/add" class="btn btn-dark btn-lg col"><i class="fas fa-user-circle mx-2"></i>Add Book to Personal
+        List<i class="far fa-user-circle mx-2"></i></a>
+      {{/if}}
+    </div>
+
 </div>
 {{> _ideas}}

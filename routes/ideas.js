@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
   Idea.find({})
     .sort({ date: "desc" })
     .then(ideas => {
-      res.render("./ideas/index", {
+      res.render("./ideas/public", {
         ideas,
         commonVariables: vars
       });

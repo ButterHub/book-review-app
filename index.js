@@ -6,12 +6,16 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
 
 const app = express();
 
 // Load routes
 const ideas = require("./routes/ideas"); // we exported the ideas and users router
 const users = require("./routes/users");
+
+// Passport config
+require("./config/passport")(passport);
 
 // Load common variables
 const vars = require("./vars");
@@ -58,14 +62,19 @@ app.use(
   })
 );
 
+// Middleware: passport session
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Middleware: connect-flash
 app.use(flash());
 
-// Global variables
+// Middleware: Global variables
 app.use(function(req, res, next) {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
   next();
 });
 
