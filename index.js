@@ -18,10 +18,10 @@ const vars = require("./vars");
 
 // Mongoose connect
 // Load config
-const db = require("./config/database");
+const dbURI = process.env.mongoURI || require("./config/database").mongoURI;
 mongoose
   .connect(
-    db.mongoURI || process.env.mongoURI,
+    dbURI,
     {
       useNewUrlParser: true
     }
