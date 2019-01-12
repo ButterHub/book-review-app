@@ -6,8 +6,8 @@ Click [here](https://butterworth-book-reviews.herokuapp.com/) to try it out. Hos
 
 # I used...
 
-*bcrypt: password hashing
-*passport: authentication
-*mongoDB: for the database
-*Atlas (MongoDB): cloud database storage/ *service
-*Express: Web application framework
+- bcrypt: password hashing
+- passport: authentication
+- mongoDB: for the database
+- Atlas (MongoDB): cloud database storage/ service
+- Express: Web application framework
