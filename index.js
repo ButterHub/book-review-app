@@ -17,9 +17,11 @@ const users = require("./routes/users");
 const vars = require("./vars");
 
 // Mongoose connect
+// Load config
+const db = require("./config/database");
 mongoose
   .connect(
-    "mongodb://localhost/bbr-dev",
+    db.mongoURI,
     {
       useNewUrlParser: true
     }
