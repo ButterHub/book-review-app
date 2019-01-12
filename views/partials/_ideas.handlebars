@@ -1,3 +1,10 @@
+{{#if ideas}}
+<div class="alert alert-success font-weight-bold">
+  This is the public book list. Feel free to add books and notes. Alternatively, make an account and store your books
+  privately.
+</div>
+{{/if}}
+
 {{#each ideas}}
 <div class="card card-body mb-3">
   <img src="{{bookCoverUrl}}" style="max-width: 200px" class="img-thumbnail" alt="Book cover of {{title}} by {{author}}">
@@ -10,5 +17,8 @@
   </form>
 </div>
 {{else}}
-<p>No video ideas listed.</p>
+<div class="alert alert-danger font-weight-bold">
+  No books on the public list. Feel free to add some. Alternatively, make an account and store your books privately.
+</div>
+
 {{/each}}

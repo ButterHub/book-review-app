@@ -1,12 +1,12 @@
 {
-  "name": "vidjot",
+  "name": "book-reviews",
   "version": "1.0.0",
-  "description": "Jot down your ideas for your videos",
+  "description": "Add books and their notes to this app.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Adrian Butterworth",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -17,6 +17,7 @@
     "express-session": "^1.15.6",
     "method-override": "^3.0.0",
     "mongoose": "^5.4.3",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
