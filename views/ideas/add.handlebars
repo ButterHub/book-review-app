@@ -1,0 +1,29 @@
+{{#each errors}}
+<div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+<div class="card card-body">
+  <h3>Book notes</h3>
+  <form action="/ideas" method="POST">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" class="form-control" placeholder="The art of the deal" required>
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" class="form-control" placeholder="Donald J. Trump" required>
+    </div>
+    <div class="form-group">
+      <label for="bookCoverUrl">Book cover photo</label>
+      <input type="text" name="bookCoverUrl" id="bookCoverUrl" class="form-control" placeholder="URL to book cover picture"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea name="notes" id="notes" class="form-control" placeholder="Extremely amazing book. Well done DJT"
+        required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+  </form>
+</div>

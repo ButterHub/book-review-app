@@ -1,0 +1,14 @@
+{{#each ideas}}
+<div class="card card-body mb-3">
+  <img src="{{bookCoverUrl}}" style="max-width: 200px" class="img-thumbnail" alt="Book cover of {{title}} by {{author}}">
+  <h4>{{title}} by {{author}}</h4>
+  <p>{{notes}}</p>
+  <p>{{date}}</p>
+  <a href="/ideas/edit/{{id}}" class="btn btn-secondary mb-2">EDIT</a>
+  <form action="/ideas/{{id}}?_method=DELETE" method="POST">
+    <input type="submit" value="DELETE" class="btn btn-danger btn-block">
+  </form>
+</div>
+{{else}}
+<p>No video ideas listed.</p>
+{{/each}}
