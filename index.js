@@ -21,7 +21,7 @@ const vars = require("./vars");
 const db = require("./config/database");
 mongoose
   .connect(
-    db.mongoURI,
+    db.mongoURI || process.env.mongoURI,
     {
       useNewUrlParser: true
     }
@@ -43,7 +43,7 @@ app.set("view engine", "handlebars");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Middleware: static folder
+// Middleware: static folder (public folder)
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware: method override
